@@ -5,5 +5,6 @@ declare namespace Cypress {
         imageRender(): Chainable<Element>
         tableOfContent(): Chainable<Element>
         leftnavTraverse(arr: Array<string>): Chainable<Element>
+        tabsVisit(): Chainable<Element>
     }
 }

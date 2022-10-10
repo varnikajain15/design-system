@@ -45,7 +45,6 @@ Cypress.Commands.add('tableOfContent', () => {
 Cypress.Commands.add('imageRender', () => {
     cy.viewport('macbook-15');
     cy.wait(3000)
-
     cy.get('img').each(($img) => {
         cy.wrap($img).scrollIntoView().should('be.visible').should('have.attr', 'alt');
     });
@@ -61,11 +60,35 @@ Cypress.Commands.add('tileToggle', () => {
 
 Cypress.Commands.add('linkVisit', () => {
     cy.wait(1000);
-    cy.get('[data-test=Docs-Main--Row]').find('a').not(':contains("started")').each((page) => {
+    cy.get('[data-test=Docs-inner--container]').find('a').each((page) => {
         cy.request(page.prop('href'));
     })
 })
 
 Cypress.Commands.add('leftnavTraverse', (arr) => {
-    cy.get('[data-test=DesignSystem-VerticalNav--Item]').each((navLink) => arr.push(navLink.prop('href')))
+    cy.get('[data-test=Docs-Leftnav]').find('a').not(':contains("started")').each(page => {
+        cy.request(page.prop('href'));
+    })
+    cy.get('[data-test=DesignSystem-VerticalNav--Item]').each((navLink) => {
+        arr.push(navLink.prop('href'))
+    })
+})
+
+Cypress.Commands.add('tabsVisit', () => {
+    cy.get('[data-test=Docs-Main--Row]').then(($body) => {
+        if ($body.find('[data-test=DesignSystem-Tabs]').length) {
+            cy.get('[data-test=DesignSystem-Tabs--Tab]').next().each((page) => {
+                const tabName = page[0].innerText
+                const tabSlug = tabName.toLowerCase().replace(/\s/g, '-');
+                const url = page[0].baseURI;
+                const pagePath = url.split('/');
+                const pages = pagePath.slice(0, pagePath.length - 2);
+                const path = `${pages.join('/')}/${tabSlug}/`;
+                cy.visit(path);
+                cy.linkVisit();
+                cy.tableOfContent();
+                cy.imageRender();
+            })
+        }
+    });
 })

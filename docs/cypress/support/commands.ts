@@ -43,8 +43,8 @@ Cypress.Commands.add('tableOfContent', () => {
 });
 
 Cypress.Commands.add('imageRender', () => {
-    cy.viewport('macbook-15');
-    cy.wait(3000)
+    cy.viewport('macbook-15');    
+    cy.wait(3000);
     cy.get('img').each(($img) => {
         cy.wrap($img).scrollIntoView().should('be.visible').should('have.attr', 'alt');
     });

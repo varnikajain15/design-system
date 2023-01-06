@@ -258,7 +258,7 @@ export const Tabs = (props: TabsProps) => {
     const { disabled } = currentTabProp;
 
     const tabHeaderClass = classNames({
-      ['Tab']: true,
+      ['Tab align-items-center']: true,
       ['Tab--disabled']: disabled,
       ['Tab--active']: !disabled && activeIndex === index,
       ['Tab-selected']: !disabled && activeIndex === index,

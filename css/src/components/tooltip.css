@@ -7,7 +7,7 @@
   overflow: hidden;
   box-sizing: border-box;
   transition: opacity 120ms;
-  transition-delay: 800ms;
+  /* transition-delay: 8s; */
   transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
 }
 
@@ -38,7 +38,7 @@
 }
 
 .Tooltip-animation-open-top {
-  animation: tooltip-open-top 120ms cubic-bezier(0, 0, 0.3, 1);
+  animation: tooltip-open-top 120ms cubic-bezier(0, 0, 0.3, 1) 10s;
   animation-fill-mode: forwards;
 }
 .Tooltip-animation-close-top {
@@ -66,7 +66,7 @@
 }
 
 .Tooltip-animation-open-bottom {
-  animation: tooltip-open-bottom 120ms cubic-bezier(0, 0, 0.3, 1);
+  animation: tooltip-open-bottom 120ms cubic-bezier(0, 0, 0.3, 1) 800ms;
   animation-fill-mode: forwards;
 }
 .Tooltip-animation-close-bottom {
@@ -129,4 +129,8 @@
 }
 .Tooltip-animation-close-right {
   animation: tooltip-close-right 120ms cubic-bezier(0.4, 0.14, 1, 1);
+}
+
+.test {
+  transition-delay: 800ms;
 }
